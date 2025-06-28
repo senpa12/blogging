@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-12 mb-4">
+      <div class="card h-100">
+        <img src="{{ artikel.gambar.url }}" class="card-img-top" alt="{{ artikel.judul }}" width="" height="" />
+        <div class="card-body">
+          <h5 class="card-title">{{ artikel.judul }}</h5>
+          <p class="card-text">{{ artikel.konten|safe }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
