@@ -99,12 +99,8 @@ DATABASES = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # Direktori tempat Django akan mencari file statis Anda di dalam aplikasi dan STATICFILES_DIRS
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 # Tambahkan atau modifikasi ini di bagian bawah settings.py
 STATICFILES_FINDERS = [
@@ -114,7 +110,11 @@ STATICFILES_FINDERS = [
 ]
 
 # Direktori tempat `python manage.py collectstatic` akan mengumpulkan semua file statis
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Konfigurasi WhiteNoise untuk melayani compressed dan cached static files
 STORAGES = {
