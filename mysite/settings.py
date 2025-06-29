@@ -125,7 +125,6 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
 }
-
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # <--- AKHIR BAGIAN STATIC FILES
 
