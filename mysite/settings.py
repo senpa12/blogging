@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "django_ckeditor_5",
+    'django_ckeditor_5',
 
     'artikel',
     'galeri',
@@ -144,25 +144,8 @@ STATICFILES_DIRS = (
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Media files
-# MEDIA_URL = "/media/"
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
-
-# Konfigurasi CKEditor 5
-CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-    
-DJANGO_CKEDITOR_5_CONFIGS = {
-    'default': {
-        'toolbar': ['heading', '|', 'bold', 'italic', '|', 'link', 'imageUpload'],
-        'image': {
-            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight'],
-            'styles': ['full', 'alignLeft', 'alignRight'],
-        },
-    }
-}
-
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
