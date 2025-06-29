@@ -33,9 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ga0*#3w_!^+*(muxulruk8y2v6+)-yel4!c2d+pu0u^@$j!4bf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # <--- UBAH INI MENJADI False UNTUK PRODUKSI
 
-ALLOWED_HOSTS = ['web-production-2db59.up.railway.app']
+ALLOWED_HOSTS = ['web-production-2db59.up.railway.app', '.railway.app'] # <--- TAMBAHKAN .railway.app untuk subdomain lain jika ada
 
 
 # Application definition
@@ -55,13 +55,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # <--- PINDAHKAN INI KE ATAS
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', # <--- HAPUS BARIS INI KARENA SUDAH DIPINDAH
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -87,13 +88,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///db.sqlite3', # Default untuk lokal
@@ -101,11 +95,32 @@ DATABASES = {
     )
 }
 
+# <--- TAMBAHKAN ATAU SESUAIKAN BAGIAN STATIC FILES INI
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
+STATIC_URL = '/static/'
+
+# Direktori tempat Django akan mencari file statis Anda di dalam aplikasi dan STATICFILES_DIRS
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Direktori tempat `python manage.py collectstatic` akan mengumpulkan semua file statis
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Konfigurasi WhiteNoise untuk melayani compressed dan cached static files
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+# <--- AKHIR BAGIAN STATIC FILES
+
+
+# Media files (jika Anda memiliki file yang diunggah pengguna)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Password validation
@@ -138,22 +153,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), # Jika Anda punya folder 'static' di root proyek
-    # Jika Anda punya folder static di dalam aplikasi, Django akan menemukannya otomatis
-]
-
-# Media files
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -194,7 +193,7 @@ CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': {
             'items': ['heading', '|', 'bold', 'italic', 'link',
-                        'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
                     }
 
     },
@@ -208,7 +207,7 @@ CKEDITOR_5_CONFIGS = {
         ],
         'toolbar': {
             'items': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-                        'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                      'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
                     'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
                     'insertTable',
@@ -255,4 +254,4 @@ CKEDITOR_5_CONFIGS = {
             'reversed': 'true',
         }
     }
-}
+}   
