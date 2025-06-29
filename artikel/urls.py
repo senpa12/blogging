@@ -47,3 +47,4 @@ urlpatterns = [
     path('operator/management-user/list', admin_management_user_list, name="admin_management_user_list"),
 
 ]
+    
