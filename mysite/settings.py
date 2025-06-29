@@ -106,6 +106,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# Tambahkan atau modifikasi ini di bagian bawah settings.py
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder', # Ini akan mencari di STATICFILES_DIRS Anda terlebih dahulu
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder', # Ini akan mencari di folder static setiap aplikasi (termasuk admin)
+    # 'compressor.finders.CompressorFinder', # Jika Anda menggunakan django-compressor
+]
+
 # Direktori tempat `python manage.py collectstatic` akan mengumpulkan semua file statis
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
